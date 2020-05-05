@@ -17,15 +17,14 @@ class Home extends Component {
     
     render() {
       return (
-        <div className="col-md-6">
+        <div>
         <h1>FilmBuff Home</h1>
-        <button> onClick={this.logout}>Logout</button>
-
+        <button onClick={this.logout}>Logout</button>
         </div>
+
       );
       
       }
       
     }
     export default Home;      
-        
