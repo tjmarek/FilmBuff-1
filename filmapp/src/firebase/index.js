@@ -8,5 +8,8 @@ const config = {
     storageBucket: "filmbuff-56d7a.appspot.com",
     messagingSenderId: "568301885727", 
 };
-const fire = firebase.initializeApp(config);
-export default fire;
+const app = firebase.initializeApp(config);
+const googleProvider = new firebase.auth.GoogleAuthProvider();
+
+
+export { app, googleProvider };

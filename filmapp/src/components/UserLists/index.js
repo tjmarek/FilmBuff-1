@@ -15,6 +15,16 @@ class UserList extends Component {
         };
         
     }
+
+    getMovieObject = (movieId) => {
+      return fetch(`${PATH_BASE}${PATH_MOVIE}/${movieId}?api_key=${API_KEY}&append_to_response=videos`)
+      .then(response => response.json())
+    }
+  
+    getMoviesIds = (obj) => {
+      const vals = Object.keys(obj).map(key => obj[key]);
+      return vals;
+    } 
     
     getAllMoviesFromList = (list) => {
         const moviesIdsArr = this.getMoviesIds(list);
