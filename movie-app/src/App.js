@@ -6,14 +6,13 @@ import Results from './components/Results'
 import Popup from './components/Popup'
 require('dotenv').config()
 
-
 function App() {
   const [state, setState] = useState({
     s: "",
     results: [],
     selected: {}
   });
-  const apiurl = "http://www.omdbapi.com/?apikey=process.env.API_KEY";
+  const apiurl = "http://www.omdbapi.com/?apikey=5f99b129";
 
   const search = (e) => {
     if (e.key === "Enter") {

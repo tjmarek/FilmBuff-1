@@ -1,4 +1,3 @@
-  
 import React from 'react'
 
 function Search ({ handleInput, search }) {
@@ -6,7 +5,7 @@ function Search ({ handleInput, search }) {
 		<section className="searchbox-wrap">
 			<input 
 				type="text" 
-				placeholder="Search for a movie..." 
+				placeholder="Search for a movie or television show..." 
 				className="searchbox" 
 				onChange={handleInput}
 				onKeyPress={search}
