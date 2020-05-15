@@ -37,7 +37,7 @@ class UserList extends Component {
         )
       }
 
-      componentWillReceiveProps = (nextProps) => {
+      UNSAFE_componentWillReceiveProps = (nextProps) => {
         switch (this.props.title) {
           case 'Favorites':
             this.getAllMoviesFromList(nextProps.favorites)

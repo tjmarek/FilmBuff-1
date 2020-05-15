@@ -10,7 +10,7 @@ class Logout extends Component {
     }
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     app.auth().signOut().then((user, error) => {
       this.setState({ redirect: true })
     });

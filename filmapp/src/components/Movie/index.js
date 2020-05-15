@@ -52,7 +52,7 @@ class Movie extends Component {
     }
   }
 
-  componentWillMount = () => {
+  UNSAFE_componentWillMount = () => {
     const MOVIE_ID = this.props.match.params.id;
 
     fetch(`${PATH_BASE}${PATH_MOVIE}/${MOVIE_ID}?api_key=${API_KEY}&append_to_response=videos`)
@@ -62,7 +62,7 @@ class Movie extends Component {
     ));
   }
 
-  componentWillReceiveProps = (nextProps) => {
+  UNSAFE_componentWillReceiveProps = (nextProps) => {
     if (nextProps.authenticated){
       this.processLists(nextProps.watchLater, nextProps.id, 'toWatchLater');
       this.processLists(nextProps.favorites, this.props.id, 'favorited');

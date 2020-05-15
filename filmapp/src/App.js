@@ -6,6 +6,7 @@ import { PATH_TOP_RATED } from './api';
 
 import Main from './components/Main';
 import Movie from './components/Movie';
+import Header from './components/Header';
 import Login from './components/Login';
 import Logout from './components/Logout';
 import Discover from './components/Discover';
@@ -111,7 +112,7 @@ class App extends Component {
     this.handleUserListsState(userUid, userList, userList);
   }
 
-  componentWillMount = () => {
+  UNSAFE_componentWillMount = () => {
     app.auth().onAuthStateChanged((user) => {
       if (user) {
         this.setState({
@@ -148,6 +149,10 @@ class App extends Component {
         <div className="App">
           <NotificationSystem ref="notificationSystem" />
         </div>
+        <Header
+          authenticated={this.state.authenticated}
+          user={this.state.user}
+          />
         
               <div className="App-content-wrapper">
                 <Route exact path="/login" component={Login} />
