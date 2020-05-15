@@ -40,10 +40,13 @@ class Discover extends Component {
       &sort_by=${this.props.filters.sort_by.value}.${this.props.filters.order.value}`
     )
     .then(response => response.json())
+   
+  }
+    
+     
     
       
     
-  }
 
   setMovies = (movies) => {
     const { results, page } = movies;

@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { app } from './firebase';
-import { PATH_TOP_RATED } from './api';
+import { PATH_TOP_RATED, PATH_POPULAR, PATH_UPCOMING } from './api';
 
 
 import Main from './components/Main';
+import Loading from './components/Loading';
 import Movie from './components/Movie';
 import Header from './components/Header';
+import Sidebar from './components/Sidebar';
 import Login from './components/Login';
 import Logout from './components/Logout';
 import Discover from './components/Discover';
+import SearchResults from './components/SearchResults';
 import UserLists from './components/UserLists';
 import NotificationSystem from 'react-notification-system';
 
@@ -148,11 +151,22 @@ class App extends Component {
       <BrowserRouter>
         <div className="App">
           <NotificationSystem ref="notificationSystem" />
-        </div>
+          {this.state.loading && 
+          <Loading />
+          }
+        
         <Header
           authenticated={this.state.authenticated}
           user={this.state.user}
           />
+          <div className="App-main">
+            <div className="App-sidebar-wrapper">
+              <Sidebar
+                filters={this.state.filters}
+                updateFilters={this.updateStateWithFilters}
+                resetFilters={this.resetFilters}
+              />
+              </div>
         
               <div className="App-content-wrapper">
                 <Route exact path="/login" component={Login} />
@@ -167,6 +181,16 @@ class App extends Component {
                     removeFromList={this.removeFromUserList}
                     favorites={this.state.favorites}
                     watchLater={this.state.watchLater} />}
+                />
+                <Route exact path="/popular"
+                  render={()=><Main
+                    title="Popular"
+                    section={PATH_POPULAR}
+                    authenticated={this.state.authenticated}
+                    addToList={this.addToUserList}
+                    removeFromList={this.removeFromUserList}
+                    favorites={this.state.favorites}
+                    watchLater={this.state.watchLater} />}    
                  
                
                 />
@@ -180,6 +204,27 @@ class App extends Component {
                     favorites={this.state.favorites}
                     watchLater={this.state.watchLater}  />}
                 />
+                <Route exact path="/coming-soon"
+                  render={()=><Main
+                    title="Coming Soon"
+                    section={PATH_UPCOMING}
+                    authenticated={this.state.authenticated}
+                    addToList={this.addToUserList}
+                    removeFromList={this.removeFromUserList}
+                    favorites={this.state.favorites}
+                    watchLater={this.state.watchLater}  />}    
+                />
+                <Route path="/search" component={SearchResults}/>
+                <Route path="/movie/:id-:title"
+                  render={props => (
+                    <Movie {...props}
+                      id={props.match.params.id}
+                      authenticated={this.state.authenticated}
+                      onFavoriteSelect={selectedMovie => this.addToUserList(selectedMovie)}
+                      onFavoriteDeselect={selectedMovie => this.removeFromUserList(selectedMovie)}
+                      favorites={this.state.favorites}
+                      watchLater={this.state.watchLater} />)}
+                />      
                 <Route path="/movie/:id-:title"
                   render={props => (
                     <Movie {...props}
@@ -213,7 +258,8 @@ class App extends Component {
                     watchLater={this.state.watchLater}  />}
                 />
               </div>
-          
+          </div>    
+         </div> 
       </BrowserRouter>
     );
 
